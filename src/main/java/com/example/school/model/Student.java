@@ -9,9 +9,6 @@ public class Student {
     private String gender;
     private int standard;
 
-    public Student() {
-        // Empty constructor (required for some frameworks like Spring)
-    }
     
     public Student(int studentId, String studentName, String gender, int standard) {
         this.studentId = studentId;
@@ -21,7 +18,7 @@ public class Student {
     }
 
     public int getStudentId() {
-        return studentId;
+        return this.studentId;
     }
 
     public void setStudentId(int studentId) {
@@ -29,7 +26,7 @@ public class Student {
     }
 
     public String getStudentName() {
-        return studentName;
+        return this.studentName;
     }
 
     public void setStudentName(String studentName) {
@@ -37,15 +34,15 @@ public class Student {
     }
 
     public String getGender() {
-        return gender;
+        return this.gender;
     }
 
     public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public int getStandard() {
-        return standard;
+    public Integer getStandard() {
+        return this.standard;
     }
 
     public void setStandard(int standard) {

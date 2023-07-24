@@ -25,45 +25,39 @@ import java.util.List;
 public class StudentController {
 
     @Autowired
-    private StudentRepository studentRepository;
+    public StudentH2Service studentH2Service;
 
     @GetMapping("/students")
     public List<Student> getAllStudents() {
-        return studentRepository.getAllStudents();
+        return studentH2Service.getAllStudents();
     }
 
     @PostMapping("/students")
-    @ResponseStatus(HttpStatus.CREATED)
     public Student addStudent(@RequestBody Student student) {
-        return studentRepository.addStudent(student);
+        return studentH2Service.addStudent(student);
     }
 
     @PostMapping("/students/bulk")
     public String addMultipleStudents(@RequestBody List<Student> students) {
-        int count = studentRepository.addMultipleStudents(students);
-        return count + " students added.";
+        int count = studentH2Service.addMultipleStudents(students);
+        return "Successfully " + count + " students added.";
     }
 
     @GetMapping("/students/{studentId}")
     public Student getStudentById(@PathVariable("studentId") int studentId) {
-        Student student = studentRepository.getStudentById(studentId);
-        if (student == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found");
-        }
+        Student student = studentH2Service.getStudentById(studentId);
         return student;
     }
 
     @PutMapping("/students/{studentId}")
     public Student updateStudent(@PathVariable("studentId") int studentId, @RequestBody Student student) {
-        student.setStudentId(studentId);
-        studentRepository.updateStudent(student);
-        return student;
+        
+        return studentH2Service.updateStudent(studentId, student);
     }
 
     @DeleteMapping("/students/{studentId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteStudent(@PathVariable("studentId") int studentId) {
-        studentRepository.deleteStudent(studentId);
+        studentH2Service.deleteStudent(studentId);
         
     }
 }
